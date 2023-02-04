@@ -12,7 +12,7 @@ interface XorDecStringT {
 }
 
 function Main() {
-  const stringToBinary = ({ input, secretKey }: XorEncStringT): string[] => {
+  const stringToBinary = (input: string): string[] => {
     let r = [];
     for (let i = 0; i < input.length; i++) {
       r.push(input.charCodeAt(i).toString(2));
@@ -24,12 +24,7 @@ function Main() {
     return outputBin;
   };
 
-  const binaryToString = ({
-    binaryStringArray,
-    secretKey,
-  }: XorDecStringT): string => {
-    let r: string[] = [];
-
+  const binaryToString = (binaryStringArray: string[]): string => {
     const outputStr = binaryStringArray
       .map((bin) => String.fromCharCode(parseInt(bin, 2)))
       .join("");
@@ -37,7 +32,10 @@ function Main() {
     return outputStr;
   };
 
-  const makeSecretKey = (secretKey: string) => {};
+  const makeSecretKey = (secretKey: string): string[] => {
+    const secreyKeyBinary = stringToBinary(secretKey);
+    return secreyKeyBinary;
+  };
 
   /**
    * xor 비트 연산자 순서
@@ -46,20 +44,7 @@ function Main() {
    * 3. 바이너리 파일을 가지고 xor 비트 연산을 진행한다.
    */
 
-  useEffect(() => {
-    console.log(
-      stringToBinary({ input: "한글도되나?", secretKey: "secretKey" })
-    );
-    console.log(
-      binaryToString({
-        binaryStringArray: stringToBinary({
-          input: "한글도되나?",
-          secretKey: "secretKey",
-        }),
-        secretKey: "test",
-      })
-    );
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div style={{ padding: 20 }}>
